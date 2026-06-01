@@ -1,0 +1,343 @@
+
+/* ── Reset & Variables ─────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+ 
+:root {
+  --ink:    #0d0d0d;
+  --paper:  #f2ede4;
+  --accent: #e63900;
+  --muted:  #b0a89a;
+  --done:   #5a8a5a;
+  --border: 3px solid var(--ink);
+  --shadow: 5px 5px 0 var(--ink);
+}
+ 
+html { font-size: 16px; }
+ 
+/* ── Body ──────────────────────────────────────────────── */
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Space Mono', monospace;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 16px 80px;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 31px,
+      rgba(0,0,0,0.06) 31px,
+      rgba(0,0,0,0.06) 32px
+    );
+}
+ 
+/* ── Header ────────────────────────────────────────────── */
+header {
+  width: 100%;
+  max-width: 640px;
+  margin-bottom: 36px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-bottom: var(--border);
+  padding-bottom: 12px;
+}
+ 
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+ 
+.brand-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+ 
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4rem, 14vw, 6.5rem);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+ 
+.counter-block { text-align: right; }
+ 
+.counter-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--accent);
+}
+ 
+.counter-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+ 
+/* ── Input Row ─────────────────────────────────────────── */
+.input-row {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  gap: 0;
+  margin-bottom: 28px;
+}
+ 
+#task-input {
+  flex: 1;
+  padding: 14px 18px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  border: var(--border);
+  border-right: none;
+  background: #fff;
+  color: var(--ink);
+  outline: none;
+  transition: background 0.15s;
+}
+ 
+#task-input::placeholder { color: var(--muted); }
+#task-input:focus        { background: #fff9f0; }
+ 
+#add-btn {
+  padding: 14px 24px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.08em;
+  background: var(--ink);
+  color: var(--paper);
+  border: var(--border);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, transform 0.1s;
+  white-space: nowrap;
+}
+ 
+#add-btn:hover  { background: var(--accent); border-color: var(--accent); }
+#add-btn:active { transform: translate(2px, 2px); }
+ 
+/* ── Filters ───────────────────────────────────────────── */
+.filters {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  gap: 2px;
+  margin-bottom: 20px;
+}
+ 
+.filter-btn {
+  flex: 1;
+  padding: 7px 0;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: transparent;
+  border: var(--border);
+  cursor: pointer;
+  color: var(--muted);
+  transition: all 0.12s;
+}
+ 
+.filter-btn:not(:last-child) { border-right: 1.5px solid var(--ink); }
+ 
+.filter-btn.active,
+.filter-btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+ 
+/* ── Task List ─────────────────────────────────────────── */
+#task-list {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+}
+ 
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: #fff;
+  border: var(--border);
+  box-shadow: var(--shadow);
+  animation: slideIn 0.22s cubic-bezier(.22,1,.36,1);
+  transition: opacity 0.2s, transform 0.2s;
+  cursor: default;
+}
+ 
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px) scaleY(0.95); }
+  to   { opacity: 1; transform: translateY(0) scaleY(1); }
+}
+ 
+.task-item.removing {
+  opacity: 0;
+  transform: translateX(20px);
+  pointer-events: none;
+}
+ 
+.task-item.done-flash { background: #edf7ed; }
+ 
+/* ── Checkbox ──────────────────────────────────────────── */
+.check-wrap {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: var(--paper);
+  transition: background 0.12s;
+}
+ 
+.check-wrap:hover            { background: #e8e0d6; }
+.check-wrap.checked          { background: var(--done); border-color: var(--done); }
+ 
+.check-mark {
+  width: 13px;
+  height: 13px;
+  opacity: 0;
+  transition: opacity 0.12s;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+ 
+.check-wrap.checked .check-mark { opacity: 1; }
+ 
+/* ── Task Text ─────────────────────────────────────────── */
+.task-text {
+  flex: 1;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  word-break: break-word;
+  transition: color 0.2s, text-decoration 0.2s;
+}
+ 
+.task-item.completed .task-text {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--muted);
+}
+ 
+/* ── Priority Tag ──────────────────────────────────────── */
+.priority-tag {
+  flex-shrink: 0;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border: 2px solid currentColor;
+  cursor: pointer;
+  transition: all 0.12s;
+  user-select: none;
+}
+ 
+.priority-tag.low  { color: var(--muted); }
+.priority-tag.med  { color: #c07000; }
+.priority-tag.high { color: var(--accent); }
+ 
+/* ── Delete Button ─────────────────────────────────────── */
+.del-btn {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.12s, transform 0.1s;
+  padding: 0;
+  line-height: 1;
+}
+ 
+.del-btn:hover { color: var(--accent); transform: scale(1.2); }
+ 
+/* ── Empty State ───────────────────────────────────────── */
+#empty-msg {
+  width: 100%;
+  max-width: 640px;
+  text-align: center;
+  padding: 60px 0 40px;
+  color: var(--muted);
+  display: none;
+}
+ 
+#empty-msg .big {
+  font-family: 'Bebas Neue';
+  font-size: 5rem;
+  display: block;
+  letter-spacing: 0.05em;
+}
+ 
+#empty-msg .sub {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+ 
+/* ── Footer ────────────────────────────────────────────── */
+footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+ 
+.footer-stat span {
+  color: var(--accent);
+  font-weight: 700;
+}
+ 
+#clear-done {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.7);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+ 
+#clear-done:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+ 
+/* ── Drag & Drop ───────────────────────────────────────── */
+.task-item.dragging  { opacity: 0.4; box-shadow: none; }
+.task-item.drag-over { border-top: 4px solid var(--accent); }

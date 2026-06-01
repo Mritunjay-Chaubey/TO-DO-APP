@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TASKS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+ 
+  <header>
+    <div class="brand">
+      <span class="brand-label">Daily Planner</span>
+      <h1>TASKS</h1>
+    </div>
+    <div class="counter-block">
+      <div class="counter-num" id="pending-count">0</div>
+      <div class="counter-label">Remaining</div>
+    </div>
+  </header>
+ 
+  <div class="input-row">
+    <input id="task-input" type="text" placeholder="What needs to get done?" maxlength="200" autocomplete="off"/>
+    <button id="add-btn">+ ADD</button>
+  </div>
+ 
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="active">Active</button>
+    <button class="filter-btn" data-filter="completed">Done</button>
+    <button class="filter-btn" data-filter="high">!! High</button>
+  </div>
+ 
+  <ul id="task-list"></ul>
+ 
+  <div id="empty-msg">
+    <span class="big">CLEAR</span>
+    <span class="sub">Nothing left to do</span>
+  </div>
+ 
+  <footer>
+    <div class="footer-stat"><span id="done-count">0</span> done this session</div>
+    <button id="clear-done">Clear Completed</button>
+  </footer>
+ 
+  <script src="script.js"></script>
+</body>
+</html>
+ 
