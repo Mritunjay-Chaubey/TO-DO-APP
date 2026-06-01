@@ -1,4 +1,4 @@
-# TASKS — Brutalist To-Do List
+# TASKS —  To-Do App
  
 A bold, retro-brutalist daily task manager built with pure HTML, CSS, and JavaScript. No frameworks. No dependencies. Just three files and a browser.
  
