@@ -123,4 +123,17 @@ All visual tokens are defined as CSS variables at the top of `style.css`. Change
 ## 📄 License
  
 Free to use, modify, and build upon for personal or commercial projects.
- 
+
+---
+
+---
+
+## 📬 Connect With Me
+
+Thank you for checking out this project! Whether you have feedback, feature suggestions, or want to discuss potential collaborations, feel free to reach out.
+
+* **Email:** [mritunjaychaubey1709@gmail.com](mailto:mritunjaychaubey1709@gmail.com)
+* **LinkedIn:** [Mritunjay Chaubey](https://www.linkedin.com/in/mritunjay-chaubey-frontenddev-5b65a8225/)
+* **GitHub:** [@Mritunjay-Chaubey](https://github.com/Mritunjay-Chaubey)
+
+---
